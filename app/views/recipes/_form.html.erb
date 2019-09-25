@@ -1,0 +1,24 @@
+<% if recipe.errors.any? %>
+<p>Fix these errors and try again:</p>
+<ul>
+  <% recipe.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_for recipe do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+
+  <%= f.label :ingredient_ids, "Select ingredients:" %> <br>
+  <%= f.collection_check_boxes :ingredient_ids, ingredients, :id, :name do |checkbox| %>
+    <%= checkbox.check_box %>
+    <%= checkbox.label %>
+    <br>
+  <% end %>
+
+
+  <%= f.submit %>
+<% end %>
